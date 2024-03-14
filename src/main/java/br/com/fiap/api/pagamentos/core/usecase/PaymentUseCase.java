@@ -14,6 +14,7 @@ public interface PaymentUseCase {
     List<Payment> getAll();
 
     PaymentResponse getById(UUID id);
+
     Payment makePayment(MakePaymentRequest request) throws Exception;
 
     PaymentStatusResponse getPaymentStatusByOrderId(UUID id);
