@@ -45,7 +45,7 @@ public class PaymentController {
             return new ResponseEntity<>(new BaseResponse<>(
                     true,
                     paymentUseCase.getById(id)), HttpStatus.OK);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse<>(
                     false,
                     e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
