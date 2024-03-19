@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 
-@FeignClient(name = "orderClient", url = "http://localhost:8080/api/v1/orders")
+@FeignClient(name = "orderClient", url = "http://localhost:8083/api/v1/orders")
 public interface OrderClient {
 
     @GetMapping
