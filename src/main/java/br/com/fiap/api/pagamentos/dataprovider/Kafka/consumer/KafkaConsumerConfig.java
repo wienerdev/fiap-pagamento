@@ -36,8 +36,7 @@ public class KafkaConsumerConfig {
         props.put(SASL_MECHANISM, "PLAIN");
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(VALUE_DESERIALIZER_CLASS_CONFIG, CustomDeserializer.class);
-        props.put(AUTO_OFFSET_RESET_CONFIG, "earliest"); // Adicione esta linha
-        System.out.println("2----------------------------------------------------------------------------------------------------"+CONFLUENT_CLOUD_BOOTSTRAP_SERVERS);
+        props.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
         return new DefaultKafkaConsumerFactory<>(props);
     }
 

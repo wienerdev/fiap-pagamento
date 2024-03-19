@@ -18,7 +18,6 @@ public class SendToPaymentOutputPortImpl implements SendToPaymentOutputPort {
     @Override
     public void send(PaymentMessage payment, OrderEvent event) {
         payment.setOrderEvent(OrderEvent.SUCCESS_PAYMENT);
-        System.out.println("----------------------------------------------------------------------------------------------------");
         kafkaPayment.send("tp-saga-payment", payment);
     }
 
