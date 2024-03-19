@@ -29,7 +29,7 @@ public class ReceivedApprovedPaymentRequest {
             var teste = new MakePaymentRequest(paymentMessage.getOrderId(), paymentMessage.getPaymentMethod());
             Payment pay = paymentUseCase.makePayment(teste);
             sendPayment.send(new PaymentMessage(pay.getOrder(),"Débito",OrderEvent.SUCCESS_PAYMENT), OrderEvent.SUCCESS_PAYMENT);
-            System.out.println("Pagamento Realizado com sucesso.");
+            System.out.println("Pagamento Realizado com sucesso.-------------------------------------------------------------");
 
         }
 
