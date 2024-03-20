@@ -3,6 +3,7 @@ package br.com.fiap.api.pagamentos.dataprovider.Kafka;
 import br.com.fiap.api.pagamentos.dataprovider.Kafka.message.PaymentMessage;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -24,14 +25,19 @@ import static org.apache.kafka.common.config.SaslConfigs.SASL_MECHANISM;
 public class KafkaSaleProducerConfig {
 
     // Confluent Cloud credentials
-    private static final String CONFLUENT_CLOUD_BOOTSTRAP_SERVERS = "pkc-12576z.us-west2.gcp.confluent.cloud:9092";
-    private static final String CONFLUENT_CLOUD_API_KEY = "KEK7GNAS4BPKFV2H";
-    private static final String CONFLUENT_CLOUD_API_SECRET = "tZoja1y9BL/6J/a+sB9jThULD0fm1VVp/DDURzj2yHPMPvfx0PUL+PASMp9a4xOy";
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String CONFLUENT_CLOUD_BOOTSTRAP_SERVERS_VALUE;
+
+    @Value("${confluent.cloud.api.key}")
+    private String CONFLUENT_CLOUD_API_KEY;
+
+    @Value("${confluent.cloud.api.secret}")
+    private String CONFLUENT_CLOUD_API_SECRET;
 
     @Bean
     public ProducerFactory<String, PaymentMessage> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(BOOTSTRAP_SERVERS_CONFIG, CONFLUENT_CLOUD_BOOTSTRAP_SERVERS);
+        configProps.put(BOOTSTRAP_SERVERS_CONFIG, CONFLUENT_CLOUD_BOOTSTRAP_SERVERS_VALUE);
         configProps.put(SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""+CONFLUENT_CLOUD_API_KEY+"\" password=\""+CONFLUENT_CLOUD_API_SECRET+"\";");
         configProps.put(SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
         configProps.put(SASL_MECHANISM, "PLAIN");
