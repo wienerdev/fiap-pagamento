@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 
-@FeignClient(name = "orderClient", url = "http://localhost:8083/api/v1/orders")
+@FeignClient(name = "orderClient", url = "${ms-pedidos.api.url}")
 public interface OrderClient {
 
     @GetMapping
@@ -21,6 +21,6 @@ public interface OrderClient {
     ResponseEntity<Boolean> getPaymentReceivedById(@PathVariable UUID id);
 
     @PutMapping("/update-status")
-    public ResponseEntity<BaseResponse> update(@RequestBody UpdateOrderRequest request);
+    ResponseEntity<BaseResponse> update(@RequestBody UpdateOrderRequest request);
 
 }
